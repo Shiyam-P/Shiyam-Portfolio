@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SHIYAM — Full Stack Developer | Portfolio & Resume</title>
+  <meta name="description"
+    content="Official portfolio and client-facing resume of Shiyam, Full Stack Developer skilled in React.js, Node.js, Express.js, PostgreSQL, MySQL, Prisma, and REST APIs.">
+  <meta name="author" content="Shiyam">
+
+  <!-- Brand Favicon (S mark) -->
+  <link rel="icon" type="image/png" href="assets/logo.png?v=3">
+  <link rel="shortcut icon" type="image/png" href="assets/logo.png?v=3">
+  <link rel="apple-touch-icon" href="assets/logo.png?v=3">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Shiyam — Full Stack Developer">
+  <meta property="og:description" content="Building resilient web platforms and database-driven digital systems.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/logo.png?v=3">
+
+  <!-- Typography: Syne (display) + Inter (UI / body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Syne:wght@700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- Main Stylesheet (Obsidian + Crimson + White Theme) -->
+  <link rel="stylesheet" href="css/fuel-style.css?v=87">
+
+  <!-- Skip cinematic before paint when returning from a project page -->
+  <script>
+    (function () {
+      try {
+        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var params = new URLSearchParams(window.location.search);
+        var path = (window.location.pathname || '').toLowerCase();
+        var ref = document.referrer || '';
+        var skipFlag = sessionStorage.getItem('portfolio-skip-intro') === '1';
+        var fromQuery = params.get('from') === 'project';
+        var fromRef = /\/projects(\/|$)/i.test(ref);
+        var fromProject = fromQuery || fromRef || skipFlag;
+
+        if (reduce || fromProject) {
+          document.documentElement.classList.add('cinematic-skip');
+        }
+        if (fromProject) {
+          document.documentElement.classList.add('portfolio-return');
+          if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+          sessionStorage.setItem('portfolio-skip-intro', '1');
+          sessionStorage.setItem('portfolio-return-section', 'work');
+          // Ensure Work hash exists when returning from a project
+          if (!window.location.hash || window.location.hash === '#') {
+            if (history.replaceState) {
+              history.replaceState(null, '', window.location.pathname + window.location.search + '#work');
+            } else {
+              window.location.hash = 'work';
+            }
+          }
+        }
+      } catch (e) { /* ignore */ }
+    })();
+  </script>
+  <style>
+    html.cinematic-skip .cinematic-stage { display: none !important; visibility: hidden !important; }
+    html.cinematic-skip body.cinematic-entry,
+    html.cinematic-skip body.cinematic-playing {
+      /* avoid flash of intro chrome before JS finishes */
+    }
+  </style>
+</head>
+
+<body class="cinematic-entry cinematic-playing">
+  <script>
+    (function () {
+      if (document.documentElement.classList.contains('cinematic-skip')) {
+        document.body.className = 'cinematic-done';
+      }
+    })();
+  </script>
+
+  <!-- Top 60FPS Scroll Progress Bar -->
+  <div class="scroll-progress-bar" aria-hidden="true"></div>
+
+  <!-- Background Fuel Grid -->
+  <div class="fuel-grid-bg" aria-hidden="true"></div>
+
+  <!-- Cinematic Text → Interface Reveal -->
+  <div class="cinematic-stage" id="cinematicStage" aria-hidden="true">
+    <div class="cinematic-glow"></div>
+    <div class="cinematic-center">
+      <div class="cinematic-text-block" id="cinematicTextBlock">
+        <div class="cinematic-brand-line">
+          <span class="cinematic-brand-name" id="cinematicBrandName">SHIYAM</span>
+        </div>
+        <div class="cinematic-role-line">
+          <span class="cinematic-brand-role">FULL STACK DEVELOPER</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right-Side Interactive Page Dot Nav -->
+  <nav class="page-dot-nav" aria-label="Page Sections">
+    <a href="#hero" class="page-dot active" data-target="#hero" data-tooltip="01 // Intro" aria-label="Go to Intro"></a>
+    <a href="#work" class="page-dot" data-target="#work" data-tooltip="02 // Work" aria-label="Go to Work"></a>
+    <a href="#about" class="page-dot" data-target="#about" data-tooltip="03 // About" aria-label="Go to About"></a>
+    <a href="#contact" class="page-dot" data-target="#contact" data-tooltip="04 // Contact"
+      aria-label="Go to Contact"></a>
+  </nav>
+
+  <!-- Header / Navigation Bar -->
+  <header class="fuel-header">
+    <div class="container fuel-nav">
+
+      <!-- Brand Identity -->
+      <a href="#hero" class="brand-badge" aria-label="Shiyam Home">
+        <img class="brand-logo" src="assets/logo.png" alt="Shiyam" width="36" height="36" decoding="async" />
+      </a>
+
+      <!-- Center Links -->
+      <nav class="nav-center-menu" aria-label="Primary Navigation">
+        <li><a href="#work" class="nav-link">Work</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </nav>
+
+      <!-- Right Actions -->
+      <div class="nav-actions">
+        <a href="#contact" class="btn btn-outline nav-contact-btn" data-kinetic-ready="true"><span
+            class="btn-original"><span>Get In Touch</span> <svg class="btn-arrow" width="13" height="13"
+              viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
+            </svg></span><span class="btn-letters" aria-hidden="true"><span class="btn-char-stream"><span
+                class="btn-char char-up" style="--char-delay: 0ms;">G</span><span class="btn-char char-down"
+                style="--char-delay: 24ms;">e</span><span class="btn-char char-up"
+                style="--char-delay: 48ms;">t</span><span class="btn-char btn-space">&nbsp;</span><span
+                class="btn-char char-up" style="--char-delay: 96ms;">I</span><span class="btn-char char-down"
+                style="--char-delay: 120ms;">n</span><span class="btn-char btn-space">&nbsp;</span><span
+                class="btn-char char-down" style="--char-delay: 168ms;">T</span><span class="btn-char char-up"
+                style="--char-delay: 192ms;">o</span><span class="btn-char char-down"
+                style="--char-delay: 216ms;">u</span><span class="btn-char char-up"
+                style="--char-delay: 240ms;">c</span><span class="btn-char char-down"
+                style="--char-delay: 264ms;">h</span></span><span class="btn-icon-animated"
+              style="--icon-delay: 312ms;"><svg class="btn-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.2">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg></span></span></a>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ================= SECTION 01: HERO (PAGE 01) ================= -->
+  <section class="page-section hero-section reveal-page is-revealed" id="hero" data-section-index="01">
+    <div class="container">
+      <div class="hero-layout">
+
+        <!-- Left Editorial Intro -->
+        <div class="hero-content">
+
+          <div class="hero-badge-row">
+            <span class="editorial-tag hero-eyebrow">TURNING IDEAS INTO REALITY</span>
+          </div>
+
+          <h1 class="hero-headline">
+            <span class="headline-line"><span class="headline-inner">HI,</span></span>
+            <span class="headline-line"><span class="headline-inner">I'M SHIYAM</span></span>
+            <span class="headline-line"><span class="headline-inner highlight-word">FULL STACK DEVELOPER</span></span>
+          </h1>
+
+          <p class="hero-lead">
+            Transforming ambitious ideas into digital products where thoughtful experiences meet reliable engineering and real-world functionality.
+          </p>
+
+          <div class="hero-cta-group">
+            <a href="#work" class="btn btn-accent hero-btn-primary" data-kinetic-ready="true"><span
+                class="btn-original"><span>Explore My Work</span> <svg class="cta-arrow" width="14" height="14"
+                  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <line x1="12" y1="5" x2="12" y2="19" />
+                  <polyline points="19 12 12 19 5 12" />
+                </svg></span><span class="btn-letters" aria-hidden="true"><span class="btn-char-stream"><span
+                    class="btn-char char-up" style="--char-delay: 0ms;">E</span><span class="btn-char char-down"
+                    style="--char-delay: 24ms;">x</span><span class="btn-char char-up"
+                    style="--char-delay: 48ms;">p</span><span class="btn-char char-down"
+                    style="--char-delay: 72ms;">l</span><span class="btn-char char-up"
+                    style="--char-delay: 96ms;">o</span><span class="btn-char char-down"
+                    style="--char-delay: 120ms;">r</span><span class="btn-char char-up"
+                    style="--char-delay: 144ms;">e</span><span class="btn-char btn-space">&nbsp;</span><span
+                    class="btn-char char-up" style="--char-delay: 192ms;">M</span><span class="btn-char char-down"
+                    style="--char-delay: 216ms;">y</span><span class="btn-char btn-space">&nbsp;</span><span
+                    class="btn-char char-down" style="--char-delay: 264ms;">W</span><span class="btn-char char-up"
+                    style="--char-delay: 288ms;">o</span><span class="btn-char char-down"
+                    style="--char-delay: 312ms;">r</span><span class="btn-char char-up"
+                    style="--char-delay: 336ms;">k</span></span><span class="btn-icon-animated"
+                  style="--icon-delay: 384ms;"><svg class="cta-arrow" width="14" height="14" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2.5">
+                    <line x1="12" y1="5" x2="12" y2="19" />
+                    <polyline points="19 12 12 19 5 12" />
+                  </svg></span></span></a>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Skills logo strip (marquee) -->
+    <div class="hero-skills-marquee" aria-label="Technology skills">
+      <div class="hero-skills-track">
+        <div class="hero-skills-group">
+          <div class="hero-skill-item">
+            <img class="tech-icon" src="public/icons/technologies/javascript.svg" alt="" aria-label="JavaScript" width="40" height="40" decoding="async" loading="eager" />
+            <span>JavaScript</span>
+          </div>
+          <div class="hero-skill-item">
+            <img class="tech-icon" src="public/icons/technologies/typescript.svg" alt="" aria-label="TypeScript" width="40" height="40" decoding="async" loading="eager" />
+            <span>TypeScript</span>
+          </div>
+          <div class="hero-skill-item">
+            <img class="tech-icon" src="public/icons/technologies/react.svg" alt="" aria-label="React.js" width="40" height="40" decoding="async" loading="eager" />
+            <span>React.js</span>
+          </div>
+          <div class="hero-skill-item">
+            <img class="tech-icon" src="public/icons/technologies/nextjs.svg" alt="" aria-label="Next.js" width="40" height="40" decoding="async" loading="eager" />
+            <span>Next.js</span>
+          </div>
+          <div class="hero-skill-item">
+            <img class="tech-icon" src="public/icons/technologies/nodejs.svg" alt="" aria-label="Node.js" width="40" height="40" decoding="async" loading="eager" />
+            <span>Node.js</span>
+          </div>
+          <div class="hero-skill-item">
+            <img class="tech-icon" src="public/icons/technologies/express.svg" alt="" aria-label="Express.js" width="40" height="40" decoding="async" loading="eager" />
+            <span>Express.js</span>
+          </div>
+          <div class="hero-skill-item">
+            <img class="tech-icon" src="public/icons/technologies/html5.svg" alt="" aria-label="HTML5" width="40" height="40" decoding="async" loading="eager" />
+            <span>HTML5</span>
+          </div>
+          <div class="hero-skill-item">
+            <img class="tech-icon" src="public/icons/technologies/css3.svg" alt="" aria-label="CSS3" width="40" height="40" decoding="async" loading="eager" />
+            <span>CSS3</span>
+          </div>
+          <div class="hero-skill-item">
+            <img class="tech-icon" src="public/icons/technologies/tailwindcss.svg" alt="" aria-label="Tailwind CSS" width="40" height="40" decoding="async" loading="eager" />
+            <span>Tailwind CSS</span>
+          </div>
+          <div class="hero-skill-item">
+            <img class="tech-icon" src="public/icons/technologies/postgresql.svg" alt="" aria-label="PostgreSQL" width="40" height="40" decoding="async" loading="eager" />
+            <span>PostgreSQL</span>
+          </div>
+          <div class="hero-skill-item">
+            <img class="tech-icon" src="public/icons/technologies/mysql.svg" alt="" aria-label="MySQL" width="40" height="40" decoding="async" loading="eager" />
+            <span>MySQL</span>
+          </div>
+          <div class="hero-skill-item">
+            <img class="tech-icon" src="public/icons/technologies/mongodb.svg" alt="" aria-label="MongoDB" width="40" height="40" decoding="async" loading="eager" />
+            <span>MongoDB</span>
+          </div>
+          <div class="hero-skill-item">
+            <img class="tech-icon" src="public/icons/technologies/prisma.svg" alt="" aria-label="Prisma" width="40" height="40" decoding="async" loading="eager" />
+            <span>Prisma</span>
+          </div>
+          <div class="hero-skill-item">
+            <img class="tech-icon" src="public/icons/technologies/git.svg" alt="" aria-label="Git" width="40" height="40" decoding="async" loading="eager" />
+            <span>Git</span>
+          </div>
+          <div class="hero-skill-item">
+            <img class="tech-icon" src="public/icons/technologies/github.svg" alt="" aria-label="GitHub" width="40" height="40" decoding="async" loading="eager" />
+            <span>GitHub</span>
+          </div>
+          <div class="hero-skill-item">
+            <img class="tech-icon" src="public/icons/technologies/docker.svg" alt="" aria-label="Docker" width="40" height="40" decoding="async" loading="eager" />
+            <span>Docker</span>
+          </div>
+        </div>
+        <div class="hero-skills-group" aria-hidden="true">
+          <div class="hero-skill-item">
+            <img class="tech-icon" src="public/icons/technologies/javascript.svg" alt="" width="40" height="40" decoding="async" loading="eager" />
+            <span>JavaScript</span>
+          </div>
+          <div class="hero-skill-item">
+            <img class="tech-icon" src="public/icons/technologies/typescript.svg" alt="" width="40" height="40" decoding="async" loading="eager" />
+            <span>TypeScript</span>
+          </div>
+          <div class="hero-skill-item">
+            <img class="tech-icon" src="public/icons/technologies/react.svg" alt="" width="40" height="40" decoding="async" loading="eager" />
+            <span>React.js</span>
+          </div>
+          <div class="hero-skill-item">
+            <img class="tech-icon" src="public/icons/technologies/nextjs.svg" alt="" width="40" height="40" decoding="async" loading="eager" />
+            <span>Next.js</span>
+          </div>
+          <div class="hero-skill-item">
+            <img class="tech-icon" src="public/icons/technologies/nodejs.svg" alt="" width="40" height="40" decoding="async" loading="eager" />
+            <span>Node.js</span>
+          </div>
+          <div class="hero-skill-item">
+            <img class="tech-icon" src="public/icons/technologies/express.svg" alt="" width="40" height="40" decoding="async" loading="eager" />
+            <span>Express.js</span>
+          </div>
+          <div class="hero-skill-item">
+            <img class="tech-icon" src="public/icons/technologies/html5.svg" alt="" width="40" height="40" decoding="async" loading="eager" />
+            <span>HTML5</span>
+          </div>
+          <div class="hero-skill-item">
+            <img class="tech-icon" src="public/icons/technologies/css3.svg" alt="" width="40" height="40" decoding="async" loading="eager" />
+            <span>CSS3</span>
+          </div>
+          <div class="hero-skill-item">
+            <img class="tech-icon" src="public/icons/technologies/tailwindcss.svg" alt="" width="40" height="40" decoding="async" loading="eager" />
+            <span>Tailwind CSS</span>
+          </div>
+          <div class="hero-skill-item">
+            <img class="tech-icon" src="public/icons/technologies/postgresql.svg" alt="" width="40" height="40" decoding="async" loading="eager" />
+            <span>PostgreSQL</span>
+          </div>
+          <div class="hero-skill-item">
+            <img class="tech-icon" src="public/icons/technologies/mysql.svg" alt="" width="40" height="40" decoding="async" loading="eager" />
+            <span>MySQL</span>
+          </div>
+          <div class="hero-skill-item">
+            <img class="tech-icon" src="public/icons/technologies/mongodb.svg" alt="" width="40" height="40" decoding="async" loading="eager" />
+            <span>MongoDB</span>
+          </div>
+          <div class="hero-skill-item">
+            <img class="tech-icon" src="public/icons/technologies/prisma.svg" alt="" width="40" height="40" decoding="async" loading="eager" />
+            <span>Prisma</span>
+          </div>
+          <div class="hero-skill-item">
+            <img class="tech-icon" src="public/icons/technologies/git.svg" alt="" width="40" height="40" decoding="async" loading="eager" />
+            <span>Git</span>
+          </div>
+          <div class="hero-skill-item">
+            <img class="tech-icon" src="public/icons/technologies/github.svg" alt="" width="40" height="40" decoding="async" loading="eager" />
+            <span>GitHub</span>
+          </div>
+          <div class="hero-skill-item">
+            <img class="tech-icon" src="public/icons/technologies/docker.svg" alt="" width="40" height="40" decoding="async" loading="eager" />
+            <span>Docker</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SECTION 02: PROJECT SCANNER (SELECTED WORKS) ================= -->
+  <section class="page-section project-scanner-section" id="work" data-section-index="02" aria-labelledby="selectedWorksLabel">
+    <div class="project-scanner" id="projectScanner" data-project-scanner>
+
+      <div class="project-scanner-scroll" data-scanner-scroll>
+        <div class="project-scanner-sticky">
+          <div class="container project-scanner-frame">
+
+            <header class="project-scanner-header">
+              <span class="editorial-tag" id="selectedWorksLabel">Selected Works</span>
+            </header>
+
+            <div class="scanner-stage" data-scanner-stage>
+              <div class="scanner-scanline" data-scanner-scanline aria-hidden="true"></div>
+
+              <div class="scanner-copy">
+                <h2 class="scanner-title" data-scanner-title>
+                  <span class="scanner-title-line" data-scanner-title-line>AivaanTech</span>
+                  <span class="scanner-title-line" data-scanner-title-line>Platform</span>
+                </h2>
+
+                <p class="scanner-category" data-scanner-category>Client Platform / Full-Stack Development</p>
+
+                <p class="scanner-tech" data-scanner-tech aria-label="Technologies">
+                  <span class="scanner-tech-item">React.js</span>
+                  <span class="scanner-tech-sep" aria-hidden="true">·</span>
+                  <span class="scanner-tech-item">Node.js</span>
+                  <span class="scanner-tech-sep" aria-hidden="true">·</span>
+                  <span class="scanner-tech-item">PostgreSQL</span>
+                </p>
+
+                <p class="scanner-desc" data-scanner-desc>
+                  Client-facing learning platform with responsive interfaces,
+                  authentication workflows, course discovery, multilingual content,
+                  and database-driven functionality.
+                </p>
+
+                <a class="scanner-cta" data-scanner-cta href="projects/aivaantech.html">
+                  <span class="scanner-cta-label">Inspect Project</span>
+                  <span class="scanner-cta-arrow" aria-hidden="true">↗</span>
+                </a>
+              </div>
+
+              <div class="scanner-preview-slot" data-scanner-preview-slot>
+                <div class="scanner-preview has-shot" data-scanner-preview data-preview-type="image" aria-hidden="true">
+                  <div class="scanner-preview-chrome">
+                    <span class="scanner-preview-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                    <span class="scanner-preview-url" data-scanner-preview-url>aivaantech.com</span>
+                  </div>
+                  <div class="scanner-preview-body" data-scanner-preview-body>
+                    <div class="preview-ui preview-ui--image">
+                      <img
+                        class="scanner-preview-shot"
+                        data-scanner-preview-img
+                        src="assets/projects/aivaantech-preview.jpg?v=1"
+                        alt="AivaanTech platform preview"
+                        decoding="async"
+                      />
+                    </div>
+                    <div class="preview-ui preview-ui--security" hidden>
+                      <div class="preview-auth-ring">
+                        <div class="preview-auth-core"></div>
+                      </div>
+                      <div class="preview-auth-pins">
+                        <span></span><span></span><span></span><span></span>
+                      </div>
+                      <div class="preview-auth-label">LAYERED AUTH</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile fallback: stacked project scenes (no cursor follow) -->
+      <div class="scanner-mobile-stack container" data-scanner-mobile>
+        <header class="project-scanner-header">
+          <span class="editorial-tag">Selected Works</span>
+        </header>
+        <!-- Populated by JS from project data for a single source of truth -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SECTION 03: ABOUT / EDUCATION STREAM (PAGE 03) ================= -->
+  <section class="page-section" id="about" data-section-index="03">
+    <div class="container">
+
+      <div class="section-header-editorial">
+        <span class="editorial-tag">ACADEMIC MILESTONES</span>
+        <h2 class="section-title-large">THE FOUNDATION BEHIND THE WORK.</h2>
+      </div>
+
+      <div class="edu-stream" id="eduStream" data-edu-stream>
+        <div class="edu-stream-track">
+          <div class="edu-stream-line" aria-hidden="true">
+            <span class="edu-stream-line-base"></span>
+            <span class="edu-stream-line-progress"></span>
+          </div>
+
+          <article class="edu-milestone" data-edu-milestone style="--i: 0">
+            <div class="edu-node" aria-hidden="true">
+              <span class="edu-node-core"></span>
+              <span class="edu-node-ring"></span>
+            </div>
+            <div class="edu-content">
+              <span class="edu-period">May 2026 — Aug 2026</span>
+              <h3 class="edu-degree">Internship</h3>
+              <p class="edu-institution">Techiball PVT LTD, Kochi, Kerala</p>
+              <p class="edu-desc">
+                Gained hands-on experience with real development workflows, debugging, integration, and delivering
+                maintainable solutions to practical business requirements.
+              </p>
+            </div>
+          </article>
+
+          <article class="edu-milestone" data-edu-milestone style="--i: 1">
+            <div class="edu-node" aria-hidden="true">
+              <span class="edu-node-core"></span>
+              <span class="edu-node-ring"></span>
+            </div>
+            <div class="edu-content">
+              <span class="edu-period">Sep 2025 — Feb 2026</span>
+              <h3 class="edu-degree">Full Stack Developer Course</h3>
+              <p class="edu-institution">QSpider, Chennai</p>
+              <p class="edu-desc">
+                Engineered full-stack applications using React.js, Node.js, Express.js, and PostgreSQL, with RESTful APIs,
+                JWT authentication, CRUD workflows, and responsive interfaces.
+              </p>
+            </div>
+          </article>
+
+          <article class="edu-milestone" data-edu-milestone style="--i: 2">
+            <div class="edu-node" aria-hidden="true">
+              <span class="edu-node-core"></span>
+              <span class="edu-node-ring"></span>
+            </div>
+            <div class="edu-content">
+              <span class="edu-period">2022 — 2025</span>
+              <h3 class="edu-degree">B.Tech — Information Technology</h3>
+              <p class="edu-institution">Anjalai Ammal Mahalingam Engineering College, Kovilvenni, Thiruvarur</p>
+              <p class="edu-desc">
+                Advanced foundation in software engineering and application development, spanning data structures,
+                database architecture, networking, and modern computing principles.
+              </p>
+            </div>
+          </article>
+
+          <article class="edu-milestone" data-edu-milestone style="--i: 3">
+            <div class="edu-node" aria-hidden="true">
+              <span class="edu-node-core"></span>
+              <span class="edu-node-ring"></span>
+            </div>
+            <div class="edu-content">
+              <span class="edu-period">2019 — 2022</span>
+              <h3 class="edu-degree">Diploma — Computer Science Engineering</h3>
+              <p class="edu-institution">EGS Pillay Polytechnic College, Nagapattinam</p>
+              <p class="edu-desc">
+                Technical foundation in programming, databases, networking, and web technologies, strengthened through
+                practical implementation and problem-solving.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= SECTION 04: CONTACT & CLIENT INQUIRIES (PAGE 04) ================= -->
+  <section class="page-section contact-page" id="contact" data-section-index="04">
+    <div class="container">
+
+      <div class="section-header-editorial">
+        <span class="editorial-tag">Client & Recruiter Connection</span>
+        <h2 class="section-title-large">LET'S BUILD DEPENDABLE SOFTWARE.</h2>
+        <p class="section-subtitle">
+          Open to full-stack developer roles, client software contracts, and technical project collaborations.
+        </p>
+      </div>
+
+      <div class="connect-panel" id="connectPanel">
+        <button
+          type="button"
+          class="btn connect-trigger"
+          id="connectTrigger"
+          aria-expanded="false"
+          aria-controls="connectOptions"
+          data-kinetic-ready="true"
+        >
+          <span class="btn-original">
+            <span>Let’s Connect</span>
+            <span class="connect-trigger-icon" aria-hidden="true">
+              <svg class="connect-icon-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none">
+                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <svg class="connect-icon-close" width="14" height="14" viewBox="0 0 24 24" fill="none">
+                <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+              </svg>
+            </span>
+          </span>
+          <span class="btn-letters" aria-hidden="true">
+            <span class="btn-char-stream">
+              <span class="btn-char char-up" style="--char-delay: 0ms;">L</span>
+              <span class="btn-char char-down" style="--char-delay: 24ms;">e</span>
+              <span class="btn-char char-up" style="--char-delay: 48ms;">t</span>
+              <span class="btn-char char-down" style="--char-delay: 72ms;">’</span>
+              <span class="btn-char char-up" style="--char-delay: 96ms;">s</span>
+              <span class="btn-char btn-space">&nbsp;</span>
+              <span class="btn-char char-down" style="--char-delay: 144ms;">C</span>
+              <span class="btn-char char-up" style="--char-delay: 168ms;">o</span>
+              <span class="btn-char char-down" style="--char-delay: 192ms;">n</span>
+              <span class="btn-char char-up" style="--char-delay: 216ms;">n</span>
+              <span class="btn-char char-down" style="--char-delay: 240ms;">e</span>
+              <span class="btn-char char-up" style="--char-delay: 264ms;">c</span>
+              <span class="btn-char char-down" style="--char-delay: 288ms;">t</span>
+            </span>
+            <span class="btn-icon-animated" style="--icon-delay: 336ms;">
+              <span class="connect-trigger-icon" aria-hidden="true">
+                <svg class="connect-icon-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none">
+                  <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <svg class="connect-icon-close" width="14" height="14" viewBox="0 0 24 24" fill="none">
+                  <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+                </svg>
+              </span>
+            </span>
+          </span>
+        </button>
+
+        <div class="connect-unfold" id="connectOptions" hidden>
+          <div class="connect-line" aria-hidden="true"></div>
+
+          <div class="connect-rail" role="list">
+            <span class="connect-scan" aria-hidden="true"></span>
+
+            <a
+              class="connect-cell"
+              role="listitem"
+              href="https://www.linkedin.com/in/shiyam-panneerselvam-490b79288/"
+              target="_blank"
+              rel="noopener noreferrer"
+              style="--i: 0"
+            >
+              <span class="connect-cell-icon" aria-hidden="true">
+                <img src="public/icons/contact/linkedin.svg" alt="" width="20" height="20" decoding="async" />
+              </span>
+              <span class="connect-cell-body">
+                <span class="connect-cell-title">LinkedIn</span>
+                <span class="connect-cell-desc">Professional profile</span>
+              </span>
+            </a>
+
+            <a
+              class="connect-cell"
+              role="listitem"
+              href="https://github.com/shiyam-techieball"
+              target="_blank"
+              rel="noopener noreferrer"
+              style="--i: 1"
+            >
+              <span class="connect-cell-icon" aria-hidden="true">
+                <img src="public/icons/contact/github.svg" alt="" width="22" height="22" decoding="async" />
+              </span>
+              <span class="connect-cell-body">
+                <span class="connect-cell-title">GitHub</span>
+                <span class="connect-cell-desc">Projects &amp; source code</span>
+              </span>
+            </a>
+
+            <a
+              class="connect-cell"
+              role="listitem"
+              href="mailto:shiyam9904@gmail.com"
+              style="--i: 2"
+            >
+              <span class="connect-cell-icon" aria-hidden="true">
+                <img src="public/icons/contact/email.svg" alt="" width="20" height="20" decoding="async" />
+              </span>
+              <span class="connect-cell-body">
+                <span class="connect-cell-title">Email</span>
+                <span class="connect-cell-desc">Direct contact</span>
+              </span>
+            </a>
+
+            <a
+              class="connect-cell"
+              role="listitem"
+              href="tel:9345508300"
+              style="--i: 3"
+            >
+              <span class="connect-cell-icon" aria-hidden="true">
+                <img src="public/icons/contact/phone.svg" alt="" width="20" height="20" decoding="async" />
+              </span>
+              <span class="connect-cell-body">
+                <span class="connect-cell-title">Phone</span>
+                <span class="connect-cell-desc">Let’s talk</span>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= MODAL: PROJECT ARCHITECTURE DETAILS ================= -->
+  <div class="modal-overlay" id="projectModal" role="dialog" aria-modal="true" aria-labelledby="modalProjectTitle">
+    <div class="modal-container">
+      <div class="modal-header">
+        <div class="modal-header-title">
+          <span id="modalProjectCategory">Project Details</span>
+        </div>
+        <div class="modal-header-actions">
+          <button class="modal-close-btn" id="closeProjectModal" aria-label="Close modal">✕</button>
+        </div>
+      </div>
+      <div class="modal-body">
+        <h2 id="modalProjectTitle" style="font-size:24px; font-weight:800; margin-bottom:14px; color:#fff;">Project
+          Title</h2>
+
+        <div style="margin-bottom:20px;">
+          <span
+            style="font-family:var(--font-mono); font-size:11px; text-transform:uppercase; color:#a1a1aa; display:block; margin-bottom:8px;">Technologies
+            Utilized</span>
+          <div id="modalProjectTech" style="display:flex; flex-wrap:wrap; gap:6px;"></div>
+        </div>
+
+        <div style="margin-bottom:24px;">
+          <span
+            style="font-family:var(--font-mono); font-size:11px; text-transform:uppercase; color:#a1a1aa; display:block; margin-bottom:8px;">Key
+            Engineering Highlights</span>
+          <ul id="modalProjectHighlights"
+            style="list-style:disc; padding-left:20px; color:#d4d4d8; display:flex; flex-direction:column; gap:8px; font-size:13.5px; line-height:1.6;">
+          </ul>
+        </div>
+
+        <div id="modalProjectLinkContainer"
+          style="display:none; margin-top:24px; padding-top:20px; border-top:1px solid rgba(255,255,255,0.08);"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MODAL: ATS RESUME PREVIEW (100% NATIVE & PRINTABLE) ================= -->
+  <div class="modal-overlay" id="resumeModal" role="dialog" aria-modal="true" aria-labelledby="resumeModalTitle">
+    <div class="modal-container" style="max-width:920px; height:90vh;">
+      <div class="modal-header">
+        <div class="modal-header-title" id="resumeModalTitle">
+          <span>◆ ATS-FRIENDLY CLIENT RESUME</span>
+        </div>
+        <div class="modal-header-actions">
+          <a href="resume.html" target="_blank" class="btn btn-accent" style="font-size:11.5px; padding:5px 12px;">
+            Open Standalone Page ↗
+          </a>
+          <button onclick="window.print()" class="btn btn-outline" style="font-size:11.5px; padding:5px 12px;">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2" />
+              <path d="M6 14h12v8H6z" />
+            </svg>
+            Print PDF
+          </button>
+          <button class="modal-close-btn" id="closeResumeModal" aria-label="Close modal">✕</button>
+        </div>
+      </div>
+      <div class="modal-body" style="padding:32px 40px; background:#ffffff; color:#18181b;">
+
+        <!-- Header -->
+        <div style="border-bottom:2px solid #27272a; padding-bottom:16px; margin-bottom:20px;">
+          <h1 style="font-size:26px; font-weight:800; color:#18181b; margin-bottom:4px; text-transform:uppercase;">
+            SHIYAM</h1>
+          <div
+            style="font-size:13px; font-weight:700; color:#27272a; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:10px;">
+            Full Stack Developer</div>
+          <div style="display:flex; flex-wrap:wrap; gap:16px; font-size:12.5px; color:#52525b;">
+            <span><strong>Phone:</strong> 9345508300</span>
+            <span>•</span>
+            <span><strong>Email:</strong> shiyam9904@gmail.com</span>
+            <span>•</span>
+            <span><strong>LinkedIn:</strong> linkedin.com/in/shiyam-panneerselvam-490b79288</span>
+          </div>
+        </div>
+
+        <!-- Summary -->
+        <div style="margin-bottom:20px;">
+          <h2
+            style="font-size:13.5px; font-weight:800; color:#27272a; text-transform:uppercase; border-bottom:1px solid #e4e4e7; padding-bottom:4px; margin-bottom:8px;">
+            Professional Summary</h2>
+          <p style="font-size:12.5px; line-height:1.6; color:#27272a;">
+            Information Technology graduate with practical experience in full-stack web development. Skilled in
+            developing responsive, database-driven web applications using modern frontend and backend technologies.
+            Experienced with React.js, JavaScript, Node.js, Express.js, REST APIs, PostgreSQL, MySQL, Prisma,
+            authentication workflows, CRUD operations, API integrations, and responsive UI development. Hands-on
+            developer capable of understanding requirements, developing features, integrating APIs, working with
+            databases, debugging issues, and delivering production-oriented web applications.
+          </p>
+        </div>
+
+        <!-- Skills -->
+        <div style="margin-bottom:20px;">
+          <h2
+            style="font-size:13.5px; font-weight:800; color:#27272a; text-transform:uppercase; border-bottom:1px solid #e4e4e7; padding-bottom:4px; margin-bottom:8px;">
+            Technical Skills</h2>
+          <div style="display:grid; grid-template-columns:130px 1fr; gap:6px 14px; font-size:12.5px;">
+            <div style="font-weight:700; color:#18181b;">Frontend</div>
+            <div style="color:#3f3f46;">React.js, Next.js, JavaScript (ES6+), HTML5, CSS3, Tailwind CSS, Responsive Web
+              Design, DOM Manipulation, Reusable Components</div>
+
+            <div style="font-weight:700; color:#18181b;">Backend</div>
+            <div style="color:#3f3f46;">Node.js, Express.js, REST APIs, JWT Authentication, CRUD Operations, API
+              Integration</div>
+
+            <div style="font-weight:700; color:#18181b;">Databases & ORM</div>
+            <div style="color:#3f3f46;">PostgreSQL, MySQL, Prisma, SQL Queries, Database Connectivity</div>
+
+            <div style="font-weight:700; color:#18181b;">Payment</div>
+            <div style="color:#3f3f46;">Razorpay API</div>
+
+            <div style="font-weight:700; color:#18181b;">Tools</div>
+            <div style="color:#3f3f46;">Git, GitHub, Visual Studio Code, Cursor IDE, Antigravity IDE</div>
+          </div>
+        </div>
+
+        <!-- Projects -->
+        <div style="margin-bottom:20px;">
+          <h2
+            style="font-size:13.5px; font-weight:800; color:#27272a; text-transform:uppercase; border-bottom:1px solid #e4e4e7; padding-bottom:4px; margin-bottom:12px;">
+            Professional Project Experience</h2>
+
+          <!-- AivaanTech -->
+          <div style="margin-bottom:14px;">
+            <div style="display:flex; justify-content:space-between; align-items:baseline;">
+              <span style="font-size:13.5px; font-weight:700; color:#18181b;">AivaanTech Platform <span
+                  style="font-size:10px; background:#18181b; color:#fff; padding:1px 5px; border-radius:2px; margin-left:6px;">Real-World
+                  Client Platform</span></span>
+              <a href="https://learn.aivaantech.com" target="_blank" rel="noopener noreferrer"
+                style="font-size:11.5px; color:#18181b; text-decoration:underline;">learn.aivaantech.com</a>
+            </div>
+            <div style="font-size:11.5px; font-style:italic; color:#52525b; margin-bottom:4px;">React.js,
+              JavaScript/JSX, CSS, Responsive Web Development</div>
+            <ul style="list-style:disc; padding-left:18px; font-size:12px; line-height:1.5; color:#27272a;">
+              <li>Developed responsive course-platform interfaces using React.js for desktop, tablet, and mobile
+                devices.</li>
+              <li>Engineered reusable and maintainable frontend components with predictable component architecture.</li>
+              <li>Organized course-discovery pages with dynamic categorization and responsive grid layouts.</li>
+              <li>Practical experience working on an active, real-world web platform.</li>
+            </ul>
+          </div>
+
+          <!-- Fraud Prevention -->
+          <div style="margin-bottom:14px;">
+            <div style="font-size:13.5px; font-weight:700; color:#18181b;">Preventing Financial Fraud in Net Banking
+              <span style="font-size:11px; font-weight:500; color:#52525b;">(Academic & Security Project)</span>
+            </div>
+            <div style="font-size:11.5px; font-style:italic; color:#52525b; margin-bottom:4px;">AI Concepts, Face
+              Recognition, Liveness Detection, Cybersecurity, Illusion PIN</div>
+            <ul style="list-style:disc; padding-left:18px; font-size:12px; line-height:1.5; color:#27272a;">
+              <li>Multi-layer authentication approach combining face recognition and Illusion PIN technology.</li>
+              <li>Application of feature-extraction and liveness-detection concepts to identify spoofing attempts.</li>
+              <li>Focus on authentication reliability, cybersecurity, and banking-data protection.</li>
+            </ul>
+          </div>
+
+          <!-- Car Buying -->
+          <div style="margin-bottom:14px;">
+            <div style="font-size:13.5px; font-weight:700; color:#18181b;">Car Buying and Selling Web Application</div>
+            <div style="font-size:11.5px; font-style:italic; color:#52525b; margin-bottom:4px;">HTML5, CSS3, JavaScript
+              (ES6+), MySQL, REST APIs</div>
+            <ul style="list-style:disc; padding-left:18px; font-size:12px; line-height:1.5; color:#27272a;">
+              <li>Development of a responsive car buying and selling web application with user auth and CRUD
+                functionality.</li>
+              <li>REST API integration for application data flow and dynamic DOM manipulation.</li>
+              <li>MySQL database integration for persistent relational inventory records.</li>
+            </ul>
+          </div>
+
+          <!-- Student System -->
+          <div>
+            <div style="font-size:13.5px; font-weight:700; color:#18181b;">Student Information System</div>
+            <div style="font-size:11.5px; font-style:italic; color:#52525b; margin-bottom:4px;">MySQL, SQL Queries, CRUD
+              Operations, Database Connectivity</div>
+            <ul style="list-style:disc; padding-left:18px; font-size:12px; line-height:1.5; color:#27272a;">
+              <li>Development of a database-driven student management system for records, attendance, and academics.
+              </li>
+              <li>Implementation of structured SQL queries and CRUD operations for efficient record handling.</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- Education & Internships -->
+        <div
+          style="display:grid; grid-template-columns:1fr 1fr; gap:20px; border-top:1px solid #e4e4e7; padding-top:16px;">
+          <div>
+            <h2 style="font-size:13px; font-weight:800; color:#27272a; text-transform:uppercase; margin-bottom:8px;">
+              Education</h2>
+            <div style="font-size:12px; margin-bottom:8px;">
+              <strong>B.Tech in Information Technology</strong> (2022–2025)<br>
+              Anjalai Ammal Mahalingam Eng. College • CGPA: 7.65
+            </div>
+            <div style="font-size:12px;">
+              <strong>Diploma in Computer Science Eng.</strong> (2019–2022)<br>
+              EGS Pillay Polytechnic College • 86%
+            </div>
+          </div>
+          <div>
+            <h2 style="font-size:13px; font-weight:800; color:#27272a; text-transform:uppercase; margin-bottom:8px;">
+              Internships & Training</h2>
+            <div style="font-size:12px; margin-bottom:6px;">
+              • <strong>ESoft Solutions:</strong> Web Development Internship
+            </div>
+            <div style="font-size:12px; margin-bottom:6px;">
+              • <strong>Techvolt Software:</strong> Full Stack Certification
+            </div>
+            <div style="font-size:12px;">
+              • <strong>NIT Tiruchirappalli:</strong> Cybersecurity Workshop
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast-msg" id="toast" role="status" aria-live="polite">
+    ✓ Information copied to clipboard
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/main.js?v=39"></script>
+</body>
+
+</html>

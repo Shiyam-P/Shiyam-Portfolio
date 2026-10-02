@@ -414,6 +414,12 @@ body.cinematic-done .hero-section {
   z-index: 1;
 }
 
+img,
+svg,
+video {
+  max-width: 100%;
+}
+
 /* ---------------- Page-by-Page Animation Architecture ---------------- */
 .page-section {
   position: relative;
@@ -2863,7 +2869,8 @@ body.cinematic-done .hero-scroll-indicator {
   transition: none;
 }
 
-@media (max-width: 1024px) {
+/* Tablet and below — stack scanner copy + preview */
+@media (max-width: 1023px) {
   .scanner-stage {
     grid-template-columns: 1fr;
     gap: 36px;
@@ -2889,7 +2896,8 @@ body.cinematic-done .hero-scroll-indicator {
   }
 }
 
-@media (max-width: 768px) {
+/* Mobile and below — switch to stacked project list */
+@media (max-width: 767px) {
   .project-scanner-scroll {
     display: none;
   }
@@ -4264,36 +4272,98 @@ body.cinematic-done .hero-scroll-indicator {
   transform: translateY(0);
 }
 
-/* ---------------- Responsive Breakpoints ---------------- */
-@media (max-width: 1024px) {
+/* ==========================================================================
+   Responsive Breakpoints
+   Small mobile: 320–374 | Mobile: 375–767 | Tablet: 768–1023
+   Laptop: 1024–1439 | Desktop: 1440+
+   Layout/spacing only — cinematic entry & motion timings unchanged.
+   ========================================================================== */
+
+/* Desktop large monitors */
+@media (min-width: 1440px) {
+  .container {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  .fuel-header {
+    width: min(1100px, calc(100% - 48px));
+  }
+
+  .hero-section > .container {
+    padding-top: 80px;
+  }
+}
+
+/* Laptop — tighten rhythm without changing layout model */
+@media (max-width: 1439px) {
+  .container {
+    padding-left: 28px;
+    padding-right: 28px;
+  }
+
+  .page-section {
+    padding: 96px 0;
+  }
+
+  .section-header-editorial {
+    margin-bottom: 48px;
+  }
+}
+
+/* Tablet and below (≤1023) */
+@media (max-width: 1023px) {
+  .container {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .page-section {
+    padding: 88px 0;
+    scroll-margin-top: 76px;
+  }
+
   .cinematic-brand-name {
     font-size: clamp(32px, 5.5vw, 56px);
     white-space: normal;
     max-width: 90vw;
   }
+
   .hero-layout {
     grid-template-columns: 1fr;
     gap: 48px;
   }
+
+  .hero-section > .container {
+    padding-top: 88px;
+    padding-bottom: 110px;
+  }
+
   .headline-inner {
     transform: translateY(25px);
   }
+
   body.cinematic-entry .headline-line .headline-inner {
     transform: translateY(28px);
   }
+
   .hero-project-card-wrapper {
     transform: translateY(20px) scale(0.98);
   }
+
   body.cinematic-entry .hero-project-card-wrapper {
     transform: translateY(22px) scale(0.94);
   }
+
   .cinematic-glow {
     width: 520px;
     height: 520px;
   }
+
   .featured-card {
     grid-template-columns: 1fr !important;
   }
+
   .featured-card .project-media-wrapper {
     border-right: none;
     border-bottom: 1px solid var(--border-subtle);
@@ -4301,208 +4371,549 @@ body.cinematic-done .hero-scroll-indicator {
 
   .edu-stream-track {
     gap: 64px;
+    max-width: 100%;
   }
+
   .edu-degree {
     max-width: none;
-    font-size: clamp(22px, 6.5vw, 28px);
+    font-size: clamp(22px, 4.5vw, 28px);
   }
+
+  .edu-desc,
+  .edu-institution {
+    max-width: none;
+  }
+
   .connect-rail {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 12px;
   }
+
   .connect-cell {
     min-height: 128px;
     padding: 18px 16px;
   }
+
+  .section-subtitle {
+    font-size: 16px;
+    max-width: 100%;
+  }
+
+  .modal-overlay {
+    padding: 16px;
+  }
+
+  .modal-body {
+    padding: 22px;
+  }
+
+  .fuel-header {
+    width: min(960px, calc(100% - 28px));
+  }
+
+  .nav-center-menu {
+    gap: 18px;
+  }
 }
 
-@media (max-width: 768px) {
+/* Tablet only (768–1023) — keep nav in one row without overflow */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .fuel-header {
+    height: 54px;
+    width: calc(100% - 24px);
+  }
+
+  .fuel-nav {
+    padding: 0 10px 0 18px;
+  }
+
+  .nav-center-menu {
+    gap: 16px;
+  }
+
+  .nav-link {
+    font-size: 14px;
+  }
+
+  .nav-contact-btn {
+    padding: 8px 14px;
+    font-size: 11px;
+  }
+
+  .connect-rail {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .scanner-mobile-stack {
+    display: none;
+  }
+
+  .project-scanner-scroll {
+    display: block;
+  }
+}
+
+/* Mobile and below (≤767) */
+@media (max-width: 767px) {
+  :root {
+    --header-height: 64px;
+  }
+
+  .container {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .page-section {
+    padding: 72px 0;
+    scroll-margin-top: 68px;
+  }
+
+  .section-header-editorial {
+    gap: 12px;
+    margin-bottom: 36px;
+  }
+
   .fuel-header {
     top: 10px;
     width: calc(100% - 20px);
     height: 52px;
     border-radius: 9999px;
   }
+
   .fuel-nav {
-    padding: 0 8px 0 16px;
+    padding: 0 8px 0 14px;
+    gap: 8px;
   }
+
   .nav-center-menu {
     display: flex;
-    gap: 12px;
+    flex: 1;
+    justify-content: center;
+    gap: 10px;
+    min-width: 0;
   }
+
   .nav-link {
-    font-size: 13px;
+    font-size: 12px;
+    padding: 4px 0;
   }
+
+  .nav-actions {
+    flex-shrink: 0;
+  }
+
   .nav-contact-btn {
-    padding: 7px 14px;
-    font-size: 11px;
+    padding: 7px 12px;
+    font-size: 10px;
   }
+
   .brand-name {
     font-size: 14px;
   }
+
   .brand-logo {
-    height: 30px;
+    height: 28px;
   }
+
+  .hero-section > .container {
+    padding-top: 76px;
+    padding-bottom: 100px;
+  }
+
+  .hero-badge-row {
+    margin-bottom: 16px;
+    width: 100%;
+  }
+
   .hero-eyebrow {
-    font-size: 15px;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    gap: 10px;
+    white-space: normal;
+    text-align: center;
+    justify-content: center;
+    max-width: 100%;
   }
+
+  .hero-eyebrow::before,
+  .hero-eyebrow::after {
+    width: 18px;
+  }
+
   .hero-headline {
-    font-size: 30px;
+    font-size: clamp(26px, 8vw, 30px);
     line-height: 1.12;
+    margin-bottom: 18px;
   }
+
   .hero-headline .highlight-word {
-    font-size: 26px;
-    white-space: nowrap;
+    font-size: clamp(20px, 6.4vw, 26px);
+    white-space: normal;
   }
+
+  .hero-lead {
+    font-size: 15px;
+    margin-bottom: 26px;
+    padding: 0 4px;
+  }
+
+  .hero-cta-group {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hero-btn-primary,
+  .hero-btn-secondary {
+    width: min(100%, 280px);
+  }
+
   .hero-skills-marquee {
     bottom: 18px;
     width: calc(100% - 20px);
   }
+
   .hero-skills-track {
     animation-duration: 32s;
   }
+
   .hero-skills-group {
     gap: 36px;
     padding-right: 36px;
   }
+
   .hero-skill-item {
     font-size: 13px;
     gap: 8px;
   }
+
   .hero-skill-item .tech-icon {
     width: 28px;
     height: 28px;
   }
+
   .hero-skill-item svg {
     width: 28px;
     height: 28px;
   }
+
   .headline-inner {
     transform: translateY(18px);
   }
+
   .hero-project-card-wrapper {
     transform: translateY(15px) scale(0.99);
   }
+
   .tech-item {
     animation-delay: 0.9s !important;
   }
+
   .hero-project-card {
     grid-template-columns: 1fr;
     gap: 16px;
     padding: 22px;
   }
+
   .product-window-preview {
     min-height: 180px;
   }
+
   .hero-tech-line {
     gap: 16px;
   }
+
   .hero-scroll-indicator {
     display: none;
   }
+
   .projects-grid {
     grid-template-columns: 1fr;
   }
+
   .project-detail {
     padding: 100px 0 64px;
   }
+
+  .edu-stream {
+    padding: 4px 0 12px;
+  }
+
+  .edu-stream-track {
+    gap: 48px;
+    padding: 12px 0 24px;
+  }
+
+  .edu-milestone {
+    gap: 16px;
+  }
+
+  .edu-period {
+    font-size: 12px;
+  }
+
+  .edu-institution,
+  .edu-desc {
+    font-size: 14px;
+  }
+
   .page-section.contact-page {
     min-height: 100svh;
     padding-top: 96px;
     padding-bottom: 56px;
   }
+
   .page-section.contact-page > .container {
     gap: 36px;
   }
+
+  .connect-panel {
+    max-width: 100%;
+  }
+
   .connect-trigger,
   .connect-trigger.btn {
     font-size: 16px;
     padding: 14px 24px;
+    width: min(100%, 320px);
   }
+
   .connect-rail {
     grid-template-columns: 1fr;
     gap: 10px;
+    width: 100%;
   }
+
   .connect-cell {
     min-height: 0;
     padding: 18px 16px;
     gap: 14px;
   }
+
   .connect-cell-title {
     font-size: 16px;
   }
+
   .section-title-large {
-    font-size: 28px;
+    font-size: clamp(24px, 7vw, 28px);
   }
 
-  /* Mobile: ~3.0s identity → interface reveal */
+  .modal-overlay {
+    padding: 10px;
+    align-items: flex-end;
+  }
+
+  .modal-container {
+    max-height: 92vh;
+    border-radius: 12px 12px 0 0;
+  }
+
+  .modal-header {
+    padding: 14px 16px;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .modal-header-actions {
+    width: 100%;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+
+  .modal-body {
+    padding: 18px 16px;
+  }
+
+  .resume-split-grid {
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
+  }
+
+  /* Mobile: ~3.0s identity → interface reveal (unchanged timings) */
   .cinematic-brand-name {
     font-size: clamp(28px, 9vw, 42px);
     letter-spacing: 0.06em;
   }
+
   .cinematic-char {
     animation-delay: calc(0.25s + (var(--i, 0) * 0.12s));
   }
+
   .cinematic-brand-role {
     animation-delay: 1.15s;
     font-size: clamp(11px, 3.2vw, 14px);
     letter-spacing: 0.16em;
     gap: 10px;
   }
+
   .cinematic-brand-role::before,
   .cinematic-brand-role::after {
     width: 18px;
   }
-  .hero-eyebrow {
-    font-size: 12px;
-    letter-spacing: 0.14em;
-    gap: 10px;
-  }
-  .hero-eyebrow::before,
-  .hero-eyebrow::after {
-    width: 18px;
-  }
+
   .brand-name {
     font-size: 14px;
     letter-spacing: 0.03em;
   }
+
   body.cinematic-entry .hero-eyebrow {
     animation-delay: 1.95s;
   }
+
   body.cinematic-entry .headline-line:nth-child(1) .headline-inner {
     animation-delay: 2.00s;
   }
+
   body.cinematic-entry .headline-line:nth-child(2) .headline-inner {
     animation-delay: 2.10s;
   }
+
   body.cinematic-entry .headline-line:nth-child(3) .headline-inner {
     animation-delay: 2.20s;
   }
+
   body.cinematic-entry .headline-line .headline-inner {
     transform: translateY(14px);
   }
+
   body.cinematic-entry .hero-project-card-wrapper {
     animation-delay: 2.05s;
     transform: translate3d(0, 12px, 0) scale(0.98);
   }
+
   body.cinematic-entry .fuel-header {
     animation-delay: 1.90s;
   }
+
   body.cinematic-entry .hero-lead {
     animation-delay: 2.30s;
   }
+
   body.cinematic-entry .hero-btn-primary {
     animation-delay: 2.40s;
   }
+
   body.cinematic-entry .hero-btn-secondary {
     animation-delay: 2.50s;
   }
+
   body.cinematic-entry.cinematic-morph .hero-tech-line {
     animation-delay: 2.60s;
   }
+
   .cinematic-glow {
     width: 280px;
     height: 280px;
   }
 }
+
+/* Small phones (320–374) */
+@media (max-width: 374px) {
+  .container {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .fuel-header {
+    top: 8px;
+    width: calc(100% - 12px);
+    height: 48px;
+  }
+
+  .fuel-nav {
+    padding: 0 6px 0 10px;
+  }
+
+  .brand-logo {
+    height: 24px;
+  }
+
+  /* Contact lives in center nav — hide crowded CTA */
+  .nav-contact-btn {
+    display: none;
+  }
+
+  .nav-center-menu {
+    gap: 14px;
+    justify-content: flex-end;
+  }
+
+  .nav-link {
+    font-size: 12px;
+  }
+
+  .hero-section > .container {
+    padding-top: 68px;
+    padding-bottom: 88px;
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    gap: 8px;
+  }
+
+  .hero-eyebrow::before,
+  .hero-eyebrow::after {
+    width: 12px;
+  }
+
+  .hero-headline {
+    font-size: 24px;
+  }
+
+  .hero-headline .highlight-word {
+    font-size: 18px;
+    letter-spacing: -0.01em;
+  }
+
+  .hero-lead {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .hero-btn-primary,
+  .hero-btn-secondary {
+    width: 100%;
+    padding: 12px 18px;
+    font-size: 12px;
+  }
+
+  .hero-skills-marquee {
+    bottom: 12px;
+    width: calc(100% - 12px);
+  }
+
+  .hero-skill-item {
+    font-size: 12px;
+  }
+
+  .section-title-large {
+    font-size: 22px;
+  }
+
+  .edu-stream-track {
+    gap: 40px;
+  }
+
+  .edu-degree {
+    font-size: 20px;
+  }
+
+  .connect-trigger,
+  .connect-trigger.btn {
+    width: 100%;
+    font-size: 15px;
+    padding: 13px 18px;
+  }
+
+  .scanner-mobile-scene .scanner-title {
+    font-size: clamp(24px, 8vw, 32px);
+  }
+
+  .cinematic-brand-name {
+    font-size: clamp(24px, 8.5vw, 34px);
+  }
+}
+
 

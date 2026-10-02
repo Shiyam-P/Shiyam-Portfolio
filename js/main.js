@@ -129,7 +129,6 @@ function bootPortfolioInteractions() {
   initScrollIndicator();
   initPageByPageAnimations();
   initSectionTracker();
-  initPageDotNav();
   initProjectModals();
   initResumeModal();
   initContactInteractions();
@@ -269,7 +268,6 @@ const SECTION_NAMES = {
 function initSectionTracker() {
   const sections = document.querySelectorAll('.page-section');
   const navLinks = document.querySelectorAll('.nav-link');
-  const dots = document.querySelectorAll('.page-dot');
 
   if (!sections.length) return;
 
@@ -303,15 +301,6 @@ function initSectionTracker() {
         link.classList.remove('active');
       }
     });
-
-    // Update side dots (e.g. data-target="#work" active)
-    dots.forEach(dot => {
-      if (dot.getAttribute('data-target') === `#${currentSectionId}`) {
-        dot.classList.add('active');
-      } else {
-        dot.classList.remove('active');
-      }
-    });
   }
 
   // 60FPS passive scroll listener
@@ -330,21 +319,6 @@ function initSectionTracker() {
 
   // Initial call on load
   updateActiveSection();
-}
-
-/* ---------------- 4. RIGHT-SIDE PAGE DOT NAV ---------------- */
-function initPageDotNav() {
-  const dots = document.querySelectorAll('.page-dot');
-  dots.forEach(dot => {
-    dot.addEventListener('click', (e) => {
-      e.preventDefault();
-      const targetId = dot.getAttribute('data-target');
-      const targetEl = document.querySelector(targetId);
-      if (targetEl) {
-        targetEl.scrollIntoView({ behavior: 'smooth' });
-      }
-    });
-  });
 }
 
 /* ---------------- 5. MOUSE SPOTLIGHT (Fuel Signature Effect) ---------------- */

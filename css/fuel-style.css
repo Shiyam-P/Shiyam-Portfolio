@@ -342,7 +342,6 @@ body.cinematic-morph .cinematic-text-block {
 
 /* Skip painting heavy UI until morph */
 body.cinematic-entry:not(.cinematic-morph):not(.cinematic-done) .fuel-header,
-body.cinematic-entry:not(.cinematic-morph):not(.cinematic-done) .page-dot-nav,
 body.cinematic-entry:not(.cinematic-morph):not(.cinematic-done) .hero-section,
 body.cinematic-entry:not(.cinematic-morph):not(.cinematic-done) .hero-scroll-indicator,
 body.cinematic-entry:not(.cinematic-morph):not(.cinematic-done) .fuel-grid-bg {
@@ -372,7 +371,6 @@ body.cinematic-entry.cinematic-playing {
 }
 
 body.cinematic-entry.cinematic-playing .fuel-header,
-body.cinematic-entry.cinematic-playing .page-dot-nav,
 body.cinematic-entry.cinematic-playing .hero-scroll-indicator {
   pointer-events: none;
 }
@@ -460,93 +458,6 @@ body.cinematic-done .hero-section {
 .reveal-page.is-revealed .stagger-4 { transition-delay: 0.4s; opacity: 1; transform: translate3d(0,0,0); }
 
 /* ---------------- Fuel Indicators ---------------- */
-/* Right-side Page Indicator Nav Dots (Fuel Style) */
-.page-dot-nav {
-  position: fixed;
-  right: 28px;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 90;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  opacity: 0;
-  animation: pageDotNavEntrance 0.5s var(--ease-fuel) forwards;
-  animation-delay: 3.15s;
-  will-change: opacity;
-}
-
-body.cinematic-done .page-dot-nav {
-  opacity: 1 !important;
-  animation: none !important;
-}
-
-@keyframes pageDotNavEntrance {
-  to {
-    opacity: 1;
-  }
-}
-
-.page-dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.15);
-  border: 1px solid transparent;
-  transition: all var(--trans-fast);
-  position: relative;
-}
-
-.page-dot:hover {
-  background: rgba(255, 255, 255, 0.45);
-  transform: scale(1.2);
-}
-
-.page-dot.active {
-  background: var(--crimson-primary);
-  border-color: var(--crimson-bright);
-  box-shadow: 0 0 10px rgba(230, 57, 70, 0.45);
-  transform: scale(1.25);
-  animation: activeDotPulse 3s ease-in-out infinite alternate;
-}
-
-@keyframes activeDotPulse {
-  0% {
-    box-shadow: 0 0 8px rgba(230, 57, 70, 0.35);
-    transform: scale(1.22);
-  }
-  100% {
-    box-shadow: 0 0 15px rgba(230, 57, 70, 0.65);
-    transform: scale(1.30);
-  }
-}
-
-.page-dot::before {
-  content: attr(data-tooltip);
-  position: absolute;
-  right: 22px;
-  top: 50%;
-  transform: translateY(-50%) translateX(6px);
-  padding: 4px 8px;
-  background: var(--bg-elevated);
-  border: 1px solid var(--border-default);
-  border-radius: var(--radius-sm);
-  font-family: var(--font-sans);
-  font-weight: 300;
-  font-size: 10px;
-  text-transform: uppercase;
-  color: var(--text-primary);
-  white-space: nowrap;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.2s ease, transform 0.2s ease;
-}
-
-.page-dot:hover::before {
-  opacity: 1;
-  transform: translateY(-50%) translateX(0);
-}
-
 /* ---------------- Header Navigation — floating pill shape ---------------- */
 .fuel-header {
   position: fixed;
@@ -2184,7 +2095,6 @@ body.cinematic-done .hero-scroll-indicator {
   }
 
   .fuel-grid-bg::after,
-  .page-dot.active,
   .hero-project-glow,
   .hero-scroll-indicator svg {
     animation: none !important;
@@ -2196,16 +2106,11 @@ body.cinematic-done .hero-scroll-indicator {
     transform: none !important;
   }
 
-  .page-dot.active {
-    transform: scale(1.25) !important;
-  }
-
   .hero-scroll-indicator svg {
     transform: none !important;
   }
 
   body.cinematic-entry .fuel-header,
-  body.cinematic-entry .page-dot-nav,
   body.cinematic-entry .hero-section,
   body.cinematic-entry .hero-scroll-indicator,
   body.cinematic-entry .headline-inner,
@@ -4408,9 +4313,6 @@ body.cinematic-done .hero-scroll-indicator {
   .connect-cell {
     min-height: 128px;
     padding: 18px 16px;
-  }
-  .page-dot-nav {
-    display: none;
   }
 }
 
